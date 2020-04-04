@@ -1,19 +1,19 @@
 package starter.stepdefinitions;
 
+import io.cucumber.java.en.And;
 import io.cucumber.java.en.Given;
 import io.cucumber.java.en.Then;
 import io.cucumber.java.en.When;
 import net.thucydides.core.annotations.Steps;
-import org.assertj.core.api.Condition;
-import org.junit.Assume;
 import starter.navigation.NavigateTo;
 import starter.search.SearchFor;
 import starter.search.SearchResult;
+import starter.search.SearchResultList;
 
 import static org.assertj.core.api.Assertions.assertThat;
 import static starter.matchers.TextMatcher.textOf;
 
-public class SearchOnDuckDuckGoStepDefinitions {
+public class SearchOnMlcInsuranceStepDefinitions {
 
     @Steps
     NavigateTo navigateTo;
@@ -24,10 +24,10 @@ public class SearchOnDuckDuckGoStepDefinitions {
     @Steps
     SearchResult searchResult;
 
-    @Given("^(?:.*) is on the DuckDuckGo home page")
-    public void i_am_on_the_DuckDuckGo_home_page() {
-        navigateTo.theDuckDuckGoHomePage();
-    }
+    @Steps
+    SearchResultList searchResultList;
+
+
 
     @When("^s?he (?:searches|has searched) for \"(.*)\"")
     public void i_search_for(String term) {
@@ -44,5 +44,15 @@ public class SearchOnDuckDuckGoStepDefinitions {
     public void all_the_result_titles_should_contain_the_word(String expectedTerm) {
         assertThat(searchResult.titles())
                 .allMatch(title -> textOf(title).containsIgnoringCase(expectedTerm));
+    }
+
+    @Given("a user is on the mlc insurance page")
+    public void aUserIsOnTheMlcInsurancePage() {
+        navigateTo.mlcInsurancePage();
+    }
+
+    @And("user clicks on the lifeview link")
+    public void userClicksOnTheLifeviewLink() {
+        searchResultList.clickOnthesearchedTerm();
     }
 }

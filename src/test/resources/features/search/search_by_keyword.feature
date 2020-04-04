@@ -10,3 +10,13 @@ Feature: Search by keyword
     And he has searched for "Cucumber"
     When he searches again for "zucchini"
     Then all the result titles should contain the word "zucchini"
+
+
+  Scenario: Request a demo on Lifeview
+    Given a user is on the mlc insurance page
+    When he searches for "lifeview"
+    Then all the result titles should contain the word "lifeview"
+    And user clicks on the lifeview link
+#    Then user should be navigated to lifeview landing page
+#    When the user clicks on "Request a demo" button
+#    Then a form is displayed and data is entered in the form
