@@ -6,6 +6,7 @@ import io.cucumber.java.en.Then;
 import io.cucumber.java.en.When;
 import net.thucydides.core.annotations.Steps;
 import starter.navigation.LifeViewActions;
+import starter.lifeview.LifeView;
 import starter.navigation.NavigateTo;
 import starter.search.SearchFor;
 import starter.search.SearchResult;
@@ -26,6 +27,10 @@ public class SearchOnMlcInsuranceStepDefinitions {
 
     @Steps
     SearchResult searchResult;
+
+    @Steps
+    LifeView lifeViewPage;
+
 
     @Steps
     SearchResultList searchResultList;
