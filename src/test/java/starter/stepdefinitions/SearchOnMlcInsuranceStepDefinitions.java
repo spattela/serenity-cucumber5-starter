@@ -5,10 +5,13 @@ import io.cucumber.java.en.Given;
 import io.cucumber.java.en.Then;
 import io.cucumber.java.en.When;
 import net.thucydides.core.annotations.Steps;
+import starter.navigation.LifeViewActions;
 import starter.navigation.NavigateTo;
 import starter.search.SearchFor;
 import starter.search.SearchResult;
 import starter.search.SearchResultList;
+import com.google.common.collect.ImmutableList;
+import com.google.common.collect.Lists;
 
 import static org.assertj.core.api.Assertions.assertThat;
 import static starter.matchers.TextMatcher.textOf;
@@ -26,6 +29,10 @@ public class SearchOnMlcInsuranceStepDefinitions {
 
     @Steps
     SearchResultList searchResultList;
+
+    @Steps
+    LifeViewActions lifeViewActions;
+
 
 
 
@@ -54,5 +61,30 @@ public class SearchOnMlcInsuranceStepDefinitions {
     @And("user clicks on the lifeview link")
     public void userClicksOnTheLifeviewLink() {
         searchResultList.clickOnthesearchedTerm();
+    }
+
+    @Then("user should be navigated to lifeview landing page")
+    public void userShouldBeNavigatedToLifeviewLandingPage() {
+        lifeViewActions.checkPageIsLoaded();
+    }
+
+
+    @When("the user clicks on Request a demo button")
+    public void theUserClicksOnRequestADemoButton() {
+        lifeViewActions.clickOnRequestDemoPage();
+    }
+
+
+
+
+    @Then("a form is displayed to enter the following user details such as <name>,<company>,<email>,<phone>,<request details>")
+    public void aFormIsDisplayedToEnterTheFollowingUserDetailsSuchAsNameCompanyEmailPhoneRequestDetails(String name, String company, String email , String phone, String request_details) {
+        lifeViewActions.enterReqFormDetails(name,company,email,phone ,request_details);
+    }
+
+
+    @Then("a form is displayed to enter the following user details such as {string},{string},{string},{string},{string}")
+    public void aFormIsDisplayedToEnterTheFollowingUserDetailsSuchAs(String name, String company, String email, String phone, String text) {
+        lifeViewActions.enterReqFormDetails(name,company,email,phone ,text);
     }
 }
