@@ -5,6 +5,7 @@ import io.cucumber.java.en.Given;
 import io.cucumber.java.en.Then;
 import io.cucumber.java.en.When;
 import net.thucydides.core.annotations.Steps;
+import starter.lifeview.LifeView;
 import starter.navigation.NavigateTo;
 import starter.search.SearchFor;
 import starter.search.SearchResult;
@@ -25,15 +26,22 @@ public class SearchOnMlcInsuranceStepDefinitions {
     SearchResult searchResult;
 
     @Steps
+    LifeView lifeViewPage;
+
+
+    @Steps
     SearchResultList searchResultList;
 
 
+    @Given("Sergey is on the DuckDuckGo home page")
+    public void sergey_is_on_the_DuckDuckGo_home_page() {
+        navigateTo.mlcInsurancePage();
+    }
 
     @When("^s?he (?:searches|has searched) for \"(.*)\"")
     public void i_search_for(String term) {
         searchFor.term(term);
     }
-
 
     @When("^s?he (?:searches|has searched) again for \"(.*)\"")
     public void i_search_again_for(String term) {
@@ -46,13 +54,15 @@ public class SearchOnMlcInsuranceStepDefinitions {
                 .allMatch(title -> textOf(title).containsIgnoringCase(expectedTerm));
     }
 
-    @Given("a user is on the mlc insurance page")
+    @Given("A user is on the mlc insurance page")
     public void aUserIsOnTheMlcInsurancePage() {
         navigateTo.mlcInsurancePage();
     }
 
-    @And("user clicks on the lifeview link")
+    @And("He clicks on lifeview link")
     public void userClicksOnTheLifeviewLink() {
-        searchResultList.clickOnthesearchedTerm();
+        lifeViewPage.clickLifeView();
     }
+
+
 }
